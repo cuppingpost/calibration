@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>커핑 칼리브레이션 분석</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 10px 0;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    input[type="number"] {
+      width: 60px;
+    }
+    .result {
+      margin-top: 20px;
+    }
+    button {
+      padding: 8px 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>커핑 칼리브레이션 분석</h1>
+  <p>7명의 커퍼가 4개의 커피에 부여한 점수를 입력하세요 (점수 범위: 70~100)</p>
+
+  <!-- 점수 입력 폼 -->
+  <form id="scoreForm">
+    <table>
+      <thead>
+        <tr>
+          <th>커퍼</th>
+          <th>커피 1</th>
+          <th>커피 2</th>
+          <th>커피 3</th>
+          <th>커피 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 7명의 커퍼에 대한 입력 -->
+        <tr>
+          <td>커퍼 1</td>
+          <td><input type="number" name="cupper1_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper1_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper1_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper1_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+        <tr>
+          <td>커퍼 2</td>
+          <td><input type="number" name="cupper2_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper2_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper2_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper2_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+        <tr>
+          <td>커퍼 3</td>
+          <td><input type="number" name="cupper3_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper3_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper3_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper3_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+        <tr>
+          <td>커퍼 4</td>
+          <td><input type="number" name="cupper4_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper4_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper4_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper4_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+        <tr>
+          <td>커퍼 5</td>
+          <td><input type="number" name="cupper5_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper5_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper5_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper5_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+        <tr>
+          <td>커퍼 6</td>
+          <td><input type="number" name="cupper6_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper6_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper6_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper6_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+        <tr>
+          <td>커퍼 7</td>
+          <td><input type="number" name="cupper7_coffee1" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper7_coffee2" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper7_coffee3" min="70" max="100" step="0.1" required></td>
+          <td><input type="number" name="cupper7_coffee4" min="70" max="100" step="0.1" required></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" onclick="analyzeScores()">분석하기</button>
+  </form>
+
+  <div id="results" class="result"></div>
+
+  <script>
+    function analyzeScores() {
+      const numCuppers = 7;
+      const numCoffees = 4;
+      const scores = [];
+
+      // 모든 입력값을 읽어와 2차원 배열 scores[커퍼][커피] 구성 (검증 포함)
+      for (let i = 0; i < numCuppers; i++) {
+        const cupperScores = [];
+        for (let j = 0; j < numCoffees; j++) {
+          const fieldName = "cupper" + (i + 1) + "_coffee" + (j + 1);
+          const inputElem = document.getElementsByName(fieldName)[0];
+          const val = parseFloat(inputElem.value);
+          if (isNaN(val) || val < 70 || val > 100) {
+            alert("모든 점수는 70에서 100 사이여야 합니다.");
+            return;
+          }
+          cupperScores.push(val);
+        }
+        scores.push(cupperScores);
+      }
+
+      // 각 커피별 전체 평균 점수 계산 (세로 열 기준)
+      let coffeeAverages = [];
+      for (let j = 0; j < numCoffees; j++) {
+        let sum = 0;
+        for (let i = 0; i < numCuppers; i++) {
+          sum += scores[i][j];
+        }
+        coffeeAverages.push(sum / numCuppers);
+      }
+
+      // 결과 HTML 구성: 커피별 평균 점수
+      let outputHtml = "<h2>커피별 평균 점수</h2>";
+      outputHtml += "<table><thead><tr>";
+      for (let j = 0; j < numCoffees; j++) {
+        outputHtml += "<th>커피 " + (j + 1) + "</th>";
+      }
+      outputHtml += "</tr></thead><tbody><tr>";
+      for (let j = 0; j < numCoffees; j++) {
+        outputHtml += "<td>" + coffeeAverages[j].toFixed(2) + "</td>";
+      }
+      outputHtml += "</tr></tbody></table>";
+
+      // 각 커퍼별로 전체 4개 커피에 대해
+      // 1) 전체 평균과의 “일치율”: (절대 차이가 0이면 100%, 최대 차이 30일 때 0%로 가정)
+      // 2) 점수 폭: 해당 커퍼가 준 점수 중 최대값 - 최소값
+      outputHtml += "<h2>커퍼별 분석 결과</h2>";
+      outputHtml += "<table><thead><tr><th>커퍼</th><th>평균 일치율 (%)</th><th>점수 폭</th></tr></thead><tbody>";
+
+      for (let i = 0; i < numCuppers; i++) {
+        let totalMatch = 0;
+        for (let j = 0; j < numCoffees; j++) {
+          const diff = Math.abs(scores[i][j] - coffeeAverages[j]);
+          // 점수 차이가 0이면 100%, 차이가 30이면 0%가 되도록 선형 보정
+          const matchPercent = Math.max(0, 100 - (diff / 30) * 100);
+          totalMatch += matchPercent;
+        }
+        const avgMatch = totalMatch / numCoffees;
+
+        // 한 커퍼 내에서의 점수 폭 계산 (최고점 - 최저점)
+        const maxScore = Math.max(...scores[i]);
+        const minScore = Math.min(...scores[i]);
+        const scoreRange = maxScore - minScore;
+
+        outputHtml += "<tr><td>커퍼 " + (i + 1) + "</td><td>" + avgMatch.toFixed(2) +
+                      "</td><td>" + scoreRange.toFixed(2) + "</td></tr>";
+      }
+      outputHtml += "</tbody></table>";
+
+      document.getElementById("results").innerHTML = outputHtml;
+    }
+  </script>
+</body>
+</html>
