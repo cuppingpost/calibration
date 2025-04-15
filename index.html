@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ko"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;커핑 칼리브레이션 분석&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>table {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-collapse: collapse;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 10px 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>th, td {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #ccc;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input[type="number"] {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.result {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;커핑 칼리브레이션 분석&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;7명의 커퍼가 4개의 커피에 부여한 점수를 입력하세요 (점수 범위: 70~100)&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- 점수 입력 폼 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;form id="scoreForm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;th&gt;커퍼&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;th&gt;커피 1&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;th&gt;커피 2&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;th&gt;커피 3&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;th&gt;커피 4&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 7명의 커퍼에 대한 입력 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 1&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper1_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper1_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper1_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper1_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 2&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper2_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper2_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper2_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper2_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 3&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper3_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper3_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper3_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper3_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 4&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper4_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper4_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper4_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper4_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 5&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper5_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper5_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper5_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper5_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 6&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper6_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper6_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper6_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper6_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;커퍼 7&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper7_coffee1" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper7_coffee2" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper7_coffee3" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;td&gt;&lt;input type="number" name="cupper7_coffee4" min="70" max="100" step="0.1" required&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button type="button" onclick="analyzeScores()"&gt;분석하기&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="results" class="result"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function analyzeScores() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const numCuppers = 7;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const numCoffees = 4;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const scores = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// 모든 입력값을 읽어와 2차원 배열 scores[커퍼][커피] 구성 (검증 포함)</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; numCuppers; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const cupperScores = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let j = 0; j &lt; numCoffees; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const fieldName = "cupper" + (i + 1) + "_coffee" + (j + 1);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const inputElem = document.getElementsByName(fieldName)[0];</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const val = parseFloat(inputElem.value);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (isNaN(val) || val &lt; 70 || val &gt; 100) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert("모든 점수는 70에서 100 사이여야 합니다.");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>cupperScores.push(val);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>scores.push(cupperScores);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// 각 커피별 전체 평균 점수 계산 (세로 열 기준)</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let coffeeAverages = [];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let j = 0; j &lt; numCoffees; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let sum = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let i = 0; i &lt; numCuppers; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>sum += scores[i][j];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>coffeeAverages.push(sum / numCuppers);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// 결과 HTML 구성: 커피별 평균 점수</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let outputHtml = "&lt;h2&gt;커피별 평균 점수&lt;/h2&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outputHtml += "&lt;table&gt;&lt;thead&gt;&lt;tr&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let j = 0; j &lt; numCoffees; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>outputHtml += "&lt;th&gt;커피 " + (j + 1) + "&lt;/th&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outputHtml += "&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let j = 0; j &lt; numCoffees; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>outputHtml += "&lt;td&gt;" + coffeeAverages[j].toFixed(2) + "&lt;/td&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outputHtml += "&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// 각 커퍼별로 전체 4개 커피에 대해</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// 1) 전체 평균과의 “일치율”: (절대 차이가 0이면 100%, 최대 차이 30일 때 0%로 가정)</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// 2) 점수 폭: 해당 커퍼가 준 점수 중 최대값 - 최소값</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outputHtml += "&lt;h2&gt;커퍼별 분석 결과&lt;/h2&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outputHtml += "&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;커퍼&lt;/th&gt;&lt;th&gt;평균 일치율 (%)&lt;/th&gt;&lt;th&gt;점수 폭&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>for (let i = 0; i &lt; numCuppers; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let totalMatch = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let j = 0; j &lt; numCoffees; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const diff = Math.abs(scores[i][j] - coffeeAverages[j]);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>// 점수 차이가 0이면 100%, 차이가 30이면 0%가 되도록 선형 보정</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const matchPercent = Math.max(0, 100 - (diff / 30) * 100);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>totalMatch += matchPercent;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const avgMatch = totalMatch / numCoffees;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 한 커퍼 내에서의 점수 폭 계산 (최고점 - 최저점)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const maxScore = Math.max(...scores[i]);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const minScore = Math.min(...scores[i]);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const scoreRange = maxScore - minScore;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>outputHtml += "&lt;tr&gt;&lt;td&gt;커퍼 " + (i + 1) + "&lt;/td&gt;&lt;td&gt;" + avgMatch.toFixed(2) +</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>"&lt;/td&gt;&lt;td&gt;" + scoreRange.toFixed(2) + "&lt;/td&gt;&lt;/tr&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>outputHtml += "&lt;/tbody&gt;&lt;/table&gt;";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("results").innerHTML = outputHtml;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
